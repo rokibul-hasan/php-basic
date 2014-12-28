@@ -1,0 +1,33 @@
+<?php
+
+                        if(isset($_POST['all_list'])){
+                        echo "<div>";
+                        echo "<table class=\"table table-border\">";
+                         echo       "<tr>
+                                    <td>first name:</td>
+                                    <td>last name:</td>
+                                    <td>email:</td>
+                                    <td>registration no :</td>
+                                    <td>roll no:</td>
+                                    <td>season</td>
+                                </tr>";
+                                
+                        
+                                $query="SELECT * FROM st_table";
+                                $result=mysql_query($query,$connection);
+                                
+                                while($row=mysql_fetch_array($result)){
+                                  echo   "<tr><td>". $row["first_name"]."</td>
+                                              <td>".$row["last_name"]. "</td>
+                                              <td>".$row["email"].   "</td>
+                                              <td>". $row["registration"]."</td>
+                                              <td>". $row["roll"]."</td>
+                                              <td>". $row["season"]."</td>
+                                           </tr>";
+                      
+                                }
+                                
+                                
+                        echo "</table></div>";
+                    }
+                    ?>
