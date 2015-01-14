@@ -1,0 +1,46 @@
+<?php
+// custom array variable for upload file error 
+$upload_errors=array(
+  UPLOAD_ERR_OK => "no error",
+  UPLOAD_ERR_INI_SIZE => "larger then max file size",
+  UPLOAD_ERR_FORM_SIZE=>"larger then MAX_FILE_SIZE",
+  UPLOAD_ERR_PARTIAL => "partial upload",
+  UPLOAD_ERR_NO_FILE => "no file",
+  UPLOAD_ERR_CANT_WRITE => "cant wirte disk",
+  UPLOAD_ERR_EXTENSION => "file upload stoped by extension"
+);
+
+//form check and transfer file to other directory
+
+if(isset($_POST['submit'])){
+$tmp_file=$_FILES['file_upload']['tmp_name']; // temperrary file location
+$target_file=basename($_FILES['file_upload']['name']); // temporary file name
+  $upload_dir="upload"; // directory to where need to transfer file
+  if(move_uploaded_file($tmp_file,$upload_dir."/".$target_file)){
+    echo "file upload successfull";
+  }else{
+    $error=$_FILES['file_upload']['error'];
+  $massage=$upload_errors[$error];
+  }
+ 
+}
+ 
+
+
+?>
+
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<?php if(!empty($massage)){echo "<p>{$massage}</p>";}?>
+	<form action="file_upload.php" enctype="multipart/form-data" method="post">
+		<input type="hidden"  name="MAX_FILE_SIZE" value="1000000"/>
+		<input type="file" name="file_upload" />
+		<input type="submit" name="submit" value="upload file" />
+	</form>
+</body>
+</html>
