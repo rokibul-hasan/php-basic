@@ -12,15 +12,15 @@ $upload_errors=array(
 
 //form check and transfer file to other directory
 
-if(isset($_POST['submit'])){
-$tmp_file=$_FILES['file_upload']['tmp_name']; // temperrary file location
+if(isset($_POST['submit'])){ 				//if submit the form then it will affect
+$tmp_file=$_FILES['file_upload']['tmp_name']; 		// temperrary file location
 $target_file=basename($_FILES['file_upload']['name']); // temporary file name
-  $upload_dir="upload"; // directory to where need to transfer file
+  $upload_dir="upload"; 				// directory to where need to transfer file
   if(move_uploaded_file($tmp_file,$upload_dir."/".$target_file)){
     echo "file upload successfull";
   }else{
     $error=$_FILES['file_upload']['error'];
-  $massage=$upload_errors[$error];
+    $massage=$upload_errors[$error];
   }
  
 }
